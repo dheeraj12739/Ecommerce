@@ -10,16 +10,16 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table
+@Table(name = "orders") // Use a different table name
 @Entity
 public class Order {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderId;
 
     private String orderNumber;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL) // Specify target entity and cascade type
     private List<OrderLineItem> orderLineItems;
 }
